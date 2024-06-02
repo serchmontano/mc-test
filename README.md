@@ -12,6 +12,31 @@ Extras:
 Notes:
 * Fork this project and share the link of the repository once you finish the excersie.
 
+## Step 0: Project setup
+
+Before running the project, install all dependencies:
+```bash
+# using npm
+npm i --legacy-peer-deps
+
+# OR using Yarn
+yarn install
+```
+
+[Optional] - Update your packages to avoid vulnerabilities:
+```bash
+# using npm
+npm audit fix --legacy-peer-deps
+
+# OR using Yarn
+yarn upgrade
+```
+
+Install the gems for the project, for this at the root excecute:
+```bash
+bundle install
+```
+
 ## Step 1: Start the Metro Server
 
 First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.

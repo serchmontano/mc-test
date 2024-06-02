@@ -1,7 +1,7 @@
-import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import OnboardingDashboardScreen from './onboarding.dashboard.screen';
+import {HorizontalGradient} from '@atomic/atoms/gradient';
+import { OnboardingDashboardScreen } from '@app/scenes/onboarding';
 
 export type DashboardRoutes = {
   DashboardOnboarding: undefined;
@@ -9,7 +9,7 @@ export type DashboardRoutes = {
 
 const Stack = createStackNavigator<DashboardRoutes>();
 
-export const DashboardStack = () => {
+const DashboardStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="DashboardOnboarding"
@@ -21,8 +21,14 @@ export const DashboardStack = () => {
         component={OnboardingDashboardScreen}
         options={{
           headerTitle: 'Onboarding',
+          headerTintColor: 'white',
+          headerBackground: () => (
+            <HorizontalGradient style={{width: '100%', height: '100%'}} />
+          ),
         }}
       />
     </Stack.Navigator>
   );
 };
+
+export default DashboardStack;

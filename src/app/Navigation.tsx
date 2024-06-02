@@ -2,8 +2,7 @@ import React, {ReactElement} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-
-import {DashboardStack} from './scenes/dashboard.stack';
+import {DashboardStack} from './navigators';
 
 export type RootRoutes = {
   Dashboard: undefined;

@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "src/*": ["./src/*"],
+        "app/*": ["./src/app/*"],
+        "scenes/*": ["./src/app/scenes/*"],
+        "atomic/*": ["./src/atomic/*"],
+        "atoms/*": ["./src/atomic/atoms/*"],
+        "molecules/*": ["./src/atomic/molecules/*"],
+        "organisms/*": ["./src/atomic/organisms/*"],
+        "templates/*": ["./src/atomic/templates/*"],
+        "assets/*": ["./src/assets/*"],
+        "icons/*": ["./src/assets/icons/*"],
+        "mock/*": ["./src/mock/*"],
+      }
+    }
+  }
