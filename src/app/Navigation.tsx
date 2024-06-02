@@ -1,26 +1,40 @@
 import React, {ReactElement} from 'react';
-
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {DashboardStack} from './navigators';
+import {HorizontalGradient} from '@atomic/atoms/gradient';
+
+import {OnboardingDashboardScreen} from './scenes/onboarding';
+import {AppBottomTab} from './navigators';
 
 export type RootRoutes = {
-  Dashboard: undefined;
+  Onboarding: undefined;
+  App: undefined;
 };
 
 const Stack = createStackNavigator<RootRoutes>();
 
-function Navigation(): ReactElement {
+const Navigation: React.FC = (): ReactElement => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={() => ({
+        screenOptions={{
           headerTitle: 'Root Header Title',
-        })}
-        initialRouteName="Dashboard">
+        }}
+        initialRouteName="Onboarding">
         <Stack.Screen
-          name="Dashboard"
-          component={DashboardStack}
+          name="Onboarding"
+          component={OnboardingDashboardScreen}
+          options={{
+            headerTitle: 'Onboarding',
+            headerTintColor: 'white',
+            headerBackground: () => (
+              <HorizontalGradient style={{width: '100%', height: '100%'}} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="App"
+          component={AppBottomTab}
           options={{
             headerShown: false,
           }}
@@ -28,6 +42,6 @@ function Navigation(): ReactElement {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default Navigation;

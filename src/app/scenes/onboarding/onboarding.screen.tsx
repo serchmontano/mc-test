@@ -11,11 +11,11 @@ import {ContentScrollView} from '@atomic/templates';
 import {Provider} from '@atomic/molecules/card';
 import {ProviderModal} from '@atomic/organisms/modal';
 
-import {DashboardRoutes} from '@app/navigators/dashboard.stack';
 import {SERVICE_PROVIDERS} from 'src/mock/providers';
 import {AllSetPopup} from '@atomic/organisms/popup';
+import {RootRoutes} from '@app/Navigation';
 
-type ScreenProps = StackScreenProps<DashboardRoutes, 'DashboardOnboarding'>;
+type ScreenProps = StackScreenProps<RootRoutes, 'Onboarding'>;
 
 interface ProviderType {
   name: string;
@@ -36,9 +36,7 @@ const OnboardingDashboardScreen: FC<ScreenProps> = ({navigation}) => {
     providerModalRef.current?.present();
   }, []);
   const toggleContinueToDashboard = () => setContinueToDashboard(prev => !prev);
-  const moveFromOnboarding = () => {
-    console.log('first');
-  };
+  const moveFromOnboarding = () => navigation.replace('App');
 
   const styles = {
     content: {

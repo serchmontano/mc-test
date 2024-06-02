@@ -1,3 +1,4 @@
-import DashboardStack from './dashboard.stack';
+import AppBottomTab from './app.bottom-tab';
+import CardStack from './card.stack';
 
-export {DashboardStack};
+export {AppBottomTab, CardStack};
