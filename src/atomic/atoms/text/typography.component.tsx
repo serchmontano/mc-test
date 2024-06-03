@@ -11,7 +11,11 @@ type Props = {
     | 'modalTitle'
     | 'modalDescription'
     | 'label'
-    | 'dialogContent';
+    | 'dialogContent'
+    | 'balanceHeading'
+    | 'balanceLabel'
+    | 'balanceContent'
+    | 'paymentPrimaryHeading';
   [key: string]: any;
 };
 
@@ -22,6 +26,24 @@ const Typography = ({style, align = 'center', variant, ...props}: Props) => {
     general: {
       color: theme.color.text,
     } as TextStyle,
+    balanceHeading: {
+      fontSize: theme.spacing.unit(3.75),
+      fontWeight: '600',
+      color: theme.color.solid,
+    } as TextStyle,
+    balanceLabel: {
+      fontSize: theme.spacing.unit(1.75),
+      color: theme.color.description,
+    },
+    balanceContent: {
+      fontSize: theme.spacing.unit(1.75),
+      color: theme.color.solid,
+    } as TextStyle,
+    paymentPrimaryHeading: {
+      fontSize: theme.spacing.unit(2.25),
+      fontWeight: '600',
+      color: theme.color.primary,
+    },
     heading: {
       fontSize: theme.spacing.unit(2.75),
       fontWeight: '600',

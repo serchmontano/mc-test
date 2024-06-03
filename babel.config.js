@@ -17,6 +17,7 @@ module.exports = {
           '@assets': './src/assets',
           '@icons': './src/assets/icons',
           '@mock': './src/mock',
+          '@utils': './src/utils',
         },
       },
     ],

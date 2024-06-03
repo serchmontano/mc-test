@@ -24,3 +24,14 @@ export const SERVICE_PROVIDERS = [
     accentColor: '#00704A',
   },
 ];
+
+export const BALANCE = {
+  availableCredit: 9000,
+  totalCredit: 10000,
+};
+
+export const PAYMENT = {
+  paymentDue: 5,
+  statementBalance: 600,
+  miniumPayment: 60,
+}

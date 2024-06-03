@@ -11,6 +11,7 @@ enum BrandColors {
   Success = '#7A9A02',
   Label = '#666666',
   Description = '#5C5C5C',
+  ProgressBackground = '#EBEBEB',
 }
 
 export const CommonTheme: DefaultTheme = {
@@ -28,5 +29,6 @@ export const CommonTheme: DefaultTheme = {
     success: BrandColors.Success,
     label: BrandColors.Label,
     description: BrandColors.Description,
+    progressBackground: BrandColors.ProgressBackground,
   },
 };
