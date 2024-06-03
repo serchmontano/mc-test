@@ -3,15 +3,16 @@ import {DefaultTheme} from 'styled-components/native';
 enum BrandColors {
   Primary = '#E35205',
   Secondary = '#F98E20',
-  Solid = '#333333',
+  Grey = '#333333',
+  Grey100 = '#EBEBEB',
+  Grey400 = '#ADADAD',
+  Grey800 = '#5C5C5C',
   Disabled = '#D6D6D6',
-  White = '#FFFFFF',
   Background = '#FFFFFF',
   Text = '#000000',
   Success = '#7A9A02',
   Label = '#666666',
-  Description = '#5C5C5C',
-  ProgressBackground = '#EBEBEB',
+  Links = '#618DFF',
 }
 
 export const CommonTheme: DefaultTheme = {
@@ -21,14 +22,15 @@ export const CommonTheme: DefaultTheme = {
   color: {
     primary: BrandColors.Primary,
     secondary: BrandColors.Secondary,
-    solid: BrandColors.Solid,
+    grey: BrandColors.Grey,
+    grey400: BrandColors.Grey400,
+    grey800: BrandColors.Grey800,
     disabled: BrandColors.Disabled,
-    white: BrandColors.White,
     background: BrandColors.Background,
     text: BrandColors.Text,
     success: BrandColors.Success,
     label: BrandColors.Label,
-    description: BrandColors.Description,
-    progressBackground: BrandColors.ProgressBackground,
+    grey100: BrandColors.Grey100,
+    link: BrandColors.Links,
   },
 };

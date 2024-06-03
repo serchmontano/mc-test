@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import {BALANCE} from 'src/mock/providers';
 import {useTheme} from 'styled-components';
 import ProgressBar from '../popup/progress-bar.component';

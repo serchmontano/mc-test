@@ -15,7 +15,10 @@ type Props = {
     | 'balanceHeading'
     | 'balanceLabel'
     | 'balanceContent'
-    | 'paymentPrimaryHeading';
+    | 'paymentPrimaryHeading'
+    | 'transactionHeading'
+    | 'transactionLabel'
+    | 'transactonLink';
   [key: string]: any;
 };
 
@@ -29,15 +32,27 @@ const Typography = ({style, align = 'center', variant, ...props}: Props) => {
     balanceHeading: {
       fontSize: theme.spacing.unit(3.75),
       fontWeight: '600',
-      color: theme.color.solid,
+      color: theme.color.grey,
     } as TextStyle,
     balanceLabel: {
       fontSize: theme.spacing.unit(1.75),
-      color: theme.color.description,
+      color: theme.color.grey800,
     },
     balanceContent: {
       fontSize: theme.spacing.unit(1.75),
-      color: theme.color.solid,
+      color: theme.color.grey,
+    } as TextStyle,
+    transactionHeading: {
+      fontSize: theme.spacing.unit(2),
+      color: theme.color.grey,
+    } as TextStyle,
+    transactionLabel: {
+      fontSize: theme.spacing.unit(1.75),
+      color: theme.color.grey400,
+    } as TextStyle,
+    transactonLink: {
+      fontSize: theme.spacing.unit(1.75),
+      color: theme.color.link,
     } as TextStyle,
     paymentPrimaryHeading: {
       fontSize: theme.spacing.unit(2.25),
@@ -57,12 +72,12 @@ const Typography = ({style, align = 'center', variant, ...props}: Props) => {
     modalTitle: {
       fontSize: theme.spacing.unit(2.75),
       fontWeight: '600',
-      color: theme.color.solid,
+      color: theme.color.grey,
     } as TextStyle,
     modalDescription: {
       fontSize: theme.spacing.unit(2.25),
       fontWeight: '600',
-      color: theme.color.description,
+      color: theme.color.grey800,
     } as TextStyle,
     label: {
       fontSize: theme.spacing.unit(1.5),

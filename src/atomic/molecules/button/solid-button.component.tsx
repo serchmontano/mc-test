@@ -36,7 +36,7 @@ const SolidButton = ({
           : size === 'medium'
           ? theme.spacing.unit(1.5)
           : theme.spacing.unit(1.75),
-      backgroundColor: theme.color.solid,
+      backgroundColor: theme.color.grey,
     } as ViewStyle,
     text: {
       textAlign: 'center',

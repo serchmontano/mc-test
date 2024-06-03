@@ -8,7 +8,7 @@ const Divider = () => {
     divider: {
       heigth: '100%',
       width: theme.spacing.unit(0.25),
-      backgroundColor: theme.color.progressBackground,
+      backgroundColor: theme.color.grey100,
     },
   };
   return <View style={StyleSheet.flatten([styles.divider])} />;

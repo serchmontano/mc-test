@@ -13,7 +13,7 @@ const ProgressBar = ({percentage = 20, color = '#7A9A02', ...props}: Props) => {
       width: '100%',
       height: theme.spacing.unit(1),
       borderRadius: theme.spacing.unit(0.5),
-      backgroundColor: theme.color.progressBackground,
+      backgroundColor: theme.color.grey100,
     } as ViewStyle,
     progress: {
       width: `${percentage}%`,

@@ -40,7 +40,7 @@ const Input: React.FC<InputProps> = ({
     inputContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      borderColor: theme.color.solid,
+      borderColor: theme.color.grey,
       borderWidth: 1,
       borderRadius: theme.spacing.unit(0.5),
       paddingHorizontal: theme.spacing.unit(1),

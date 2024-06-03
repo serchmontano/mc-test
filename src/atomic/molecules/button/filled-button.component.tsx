@@ -48,7 +48,7 @@ const FilledButton = ({
           : theme.spacing.unit(1.75),
     } as ViewStyle,
     text: {
-      color: theme.color.white,
+      color: theme.color.background,
       fontSize:
         size === 'small'
           ? theme.spacing.unit(1.75)
@@ -61,7 +61,7 @@ const FilledButton = ({
       backgroundColor: theme.color.disabled,
     } as ViewStyle,
     textDisabled: {
-      color: theme.color.white,
+      color: theme.color.background,
     } as TextStyle,
   };
 

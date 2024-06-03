@@ -21,7 +21,7 @@ const Dialog = ({visible, onClose, ...props}: Props) => {
       height: theme.spacing.unit(24),
       padding: theme.spacing.unit(3),
       borderRadius: theme.spacing.unit(1),
-      backgroundColor: theme.color.solid,
+      backgroundColor: theme.color.grey,
       opacity: 0.8,
       alignItems: 'center',
       justifyContent: 'space-around',

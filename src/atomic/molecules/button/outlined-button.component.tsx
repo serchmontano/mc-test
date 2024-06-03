@@ -68,7 +68,7 @@ const OutlinedButton = ({
       backgroundColor: theme.color.disabled,
     } as ViewStyle,
     textDisabled: {
-      color: theme.color.white,
+      color: theme.color.background,
     } as TextStyle,
   };
 
