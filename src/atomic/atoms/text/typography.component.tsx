@@ -11,6 +11,7 @@ type Props = {
     | 'modalTitle'
     | 'modalDescription'
     | 'label'
+    | 'whiteLabel'
     | 'dialogContent'
     | 'balanceHeading'
     | 'balanceLabel'
@@ -18,7 +19,8 @@ type Props = {
     | 'paymentPrimaryHeading'
     | 'transactionHeading'
     | 'transactionLabel'
-    | 'transactonLink';
+    | 'transactonLink'
+    | 'cardTitle';
   [key: string]: any;
 };
 
@@ -66,6 +68,10 @@ const Typography = ({style, align = 'center', variant, ...props}: Props) => {
     headingDescription: {
       fontSize: theme.spacing.unit(2),
     } as TextStyle,
+    cardTitle: {
+      fontSize: theme.spacing.unit(2),
+      color: theme.color.primary,
+    } as TextStyle,
     button: {
       fontWeight: '600',
     } as TextStyle,
@@ -83,6 +89,11 @@ const Typography = ({style, align = 'center', variant, ...props}: Props) => {
       fontSize: theme.spacing.unit(1.5),
       fontWeight: '400',
       color: theme.color.label,
+    } as TextStyle,
+    whiteLabel: {
+      fontSize: theme.spacing.unit(1.5),
+      fontWeight: '400',
+      color: theme.color.background,
     } as TextStyle,
     dialogContent: {
       fontSize: theme.spacing.unit(2.25),

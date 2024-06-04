@@ -1,8 +1,8 @@
 import {formatCurrency} from '@app/utils/currency.util';
+import {Divider} from '@atomic/atoms/divider';
 import {Typography} from '@atomic/atoms/text';
 import {OutlinedButton} from '@atomic/molecules/button';
-import Divider from '@atomic/molecules/divider/divider.component';
-import {View, Text, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle} from 'react-native';
 import {PAYMENT} from 'src/mock/providers';
 import {useTheme} from 'styled-components';
 

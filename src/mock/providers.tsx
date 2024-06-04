@@ -36,6 +36,17 @@ export const PAYMENT = {
   miniumPayment: 60,
 };
 
+export const CARDS = [
+  {
+    cardHolder: 'John Doe',
+    cardNumber: '5426123456781234',
+    expMonth: '09',
+    expYear: '2025',
+    cvc: '242',
+    type: 'CREDIT'
+  },
+];
+
 export const TRANSACTIONS = [
   {
     business: 'Starbucks',
