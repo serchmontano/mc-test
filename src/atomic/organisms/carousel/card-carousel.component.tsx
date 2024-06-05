@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {
   View,
   Dimensions,
@@ -30,8 +30,7 @@ interface CardData {
   type: string;
 }
 
-const CardCarousel = ({cardLocked = false}: Props) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+const CardCarousel = ({cardLocked}: Props) => {
   const carouselRef = useRef<Carousel<CardData>>(null);
 
   const theme = useTheme();
@@ -74,7 +73,6 @@ const CardCarousel = ({cardLocked = false}: Props) => {
   });
 
   const renderItem = ({item}: {item: CardData}) => {
-    console.log(cardLocked);
     return (
       <ImageBackground
         source={require('@assets/backgrounds/card-bg.png')}
@@ -86,8 +84,14 @@ const CardCarousel = ({cardLocked = false}: Props) => {
         </Typography>
         {cardLocked && (
           <View style={StyleSheet.flatten([styles.lockMask])}>
-            <Icon name="lock" size={theme.spacing.unit(3)} color={theme.color.background} />
-            <Typography variant='whiteLabel'>Your card has been temporarily locked</Typography>
+            <Icon
+              name="lock"
+              size={theme.spacing.unit(3)}
+              color={theme.color.background}
+            />
+            <Typography variant="whiteLabel">
+              Your card has been temporarily locked
+            </Typography>
           </View>
         )}
       </ImageBackground>
@@ -103,7 +107,6 @@ const CardCarousel = ({cardLocked = false}: Props) => {
         sliderWidth={width}
         itemWidth={theme.spacing.unit(32.5)}
         renderItem={renderItem}
-        onSnapToItem={index => setActiveIndex(index)}
       />
     </View>
   );

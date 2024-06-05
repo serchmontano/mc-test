@@ -14,6 +14,9 @@ import {ProviderModal} from '@atomic/organisms/modal';
 import {SERVICE_PROVIDERS} from 'src/mock/providers';
 import {AllSetPopup} from '@atomic/organisms/popup';
 import {RootRoutes} from '@app/Navigation';
+import {useDispatch, useSelector} from 'react-redux';
+import {addProvider} from '@app/redux/slices/providers.slice';
+import {RootState} from '@app/redux/store';
 
 type ScreenProps = StackScreenProps<RootRoutes, 'Onboarding'>;
 
@@ -26,7 +29,15 @@ interface ProviderType {
 
 const OnboardingDashboardScreen: FC<ScreenProps> = ({navigation}) => {
   const theme = useTheme();
-  const [connectedServices, setConnectedServices] = useState<string[]>([]);
+  const dispatch = useDispatch();
+
+  const connectedServices = useSelector(
+    (state: RootState) => state.providers.providers,
+  );
+  const setConnectedServices = (provider: string) => {
+    dispatch(addProvider(provider));
+  };
+
   const [activeProvider, setActiveProvider] = useState(SERVICE_PROVIDERS[0]);
   const [continueToDashboard, setContinueToDashboard] = useState(false);
 

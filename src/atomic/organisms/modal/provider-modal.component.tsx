@@ -23,7 +23,7 @@ interface ProviderType {
 type Props = {
   providerModalRef: React.RefObject<BottomSheetModal>;
   provider: ProviderType;
-  setConnectedServices: React.Dispatch<React.SetStateAction<string[]>>;
+  setConnectedServices: (provider: string) => void;
   [key: string]: any;
 };
 
@@ -45,13 +45,11 @@ const ProviderModal = ({
   }, []);
 
   const handleProviderLogin = async (providerName: string) => {
-    setConnectedServices(prev => [...prev, providerName]);
+    setConnectedServices(providerName);
     setShowConfirmation(true);
 
-    // Iniciar animación
     await new Promise(resolve => setTimeout(resolve, 600));
 
-    // Cerrar el modal y ocultar el dialog al mismo tiempo
     Promise.all([
       Promise.resolve(providerModalRef?.current?.close()),
       Promise.resolve(setShowConfirmation(false)),

@@ -9,9 +9,10 @@ import {
 import {useTheme} from 'styled-components';
 
 interface Props {
+  handleAddToWallet: () => void;
   [key: string]: any;
 }
-const AddToWallet = ({...props}: Props) => {
+const AddToWallet = ({handleAddToWallet, ...props}: Props) => {
   const theme = useTheme();
   const styles = {
     container: {
@@ -33,6 +34,7 @@ const AddToWallet = ({...props}: Props) => {
     <View style={StyleSheet.flatten([styles.container])}>
       <TouchableOpacity
         style={StyleSheet.flatten([styles.containerDimensions])}
+        onPress={handleAddToWallet}
         {...props}>
         <Image
           style={StyleSheet.flatten([styles.imageDimensions])}

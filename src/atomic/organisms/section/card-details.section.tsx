@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, View, StyleSheet} from 'react-native';
+import WalletManager from 'react-native-wallet-manager';
+import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
 import {useTheme} from 'styled-components';
 import {Divider} from '@atomic/atoms/divider';
 import {Typography} from '@atomic/atoms/text';
@@ -15,6 +17,11 @@ import {
 } from '@app/utils/card.util';
 import {CARDS} from 'src/mock/providers';
 import {CardCarousel} from '@atomic/organisms/carousel';
+import Clipboard from '@react-native-community/clipboard';
+import Toast from 'react-native-toast-message';
+import {useDispatch, useSelector} from 'react-redux';
+import {toggleBlockCard} from '@app/redux/slices/card.slice';
+import {RootState} from '@app/redux/store';
 
 interface Props {
   showDetails: boolean;
@@ -22,13 +29,36 @@ interface Props {
 }
 
 const CardDetails = ({showDetails = false, onCardDetailsPress}: Props) => {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const animatedValue = useRef(new Animated.Value(showDetails ? 1 : 0)).current;
-  // TODO: Change to redux
-  const [cardLocked, setCardLocked] = useState(false);
+  const cardLocked = useSelector((state: RootState) => state.card.blockCard);
 
-  const onLockCard = () => {
-    setCardLocked(!cardLocked);
+  const rnBiometrics = new ReactNativeBiometrics();
+  const onLockCard = async () => {
+    try {
+      const {biometryType} = await rnBiometrics.isSensorAvailable();
+
+      if (
+        biometryType === BiometryTypes.TouchID ||
+        biometryType === BiometryTypes.FaceID
+      ) {
+        const result = await rnBiometrics.simplePrompt({
+          promptMessage: 'Confirm your identity',
+        });
+
+        if (result.success) {
+          dispatch(toggleBlockCard());
+        } else {
+          console.log('User cancelled biometric prompt');
+        }
+      } else {
+        console.log('Biometric sensor not available');
+        dispatch(toggleBlockCard());
+      }
+    } catch (error) {
+      console.log('Biometric authentication error', error);
+    }
   };
 
   useEffect(() => {
@@ -41,8 +71,34 @@ const CardDetails = ({showDetails = false, onCardDetailsPress}: Props) => {
 
   const containerHeight = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 270], // Ajusta este valor según el contenido
+    outputRange: [0, 270],
   });
+  const handleAddToWallet = async () => {
+    try {
+      const result = await WalletManager.addPassFromUrl(
+        'https://github.com/dev-family/react-native-wallet-manager/blob/main/example/resources/SamplePasses/Coupon.pkpass?raw=true',
+      );
+      if (result === true) {
+        Toast.show({
+          type: 'success',
+          text1: 'Success',
+          text2: 'Pass added to wallet',
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const copyToClipboard = () => {
+    Clipboard.setString(
+      `Card Number: ${CARDS[0].cardNumber}\nName: ${CARDS[0].cardHolder}`,
+    );
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Card information copied to clipboard',
+    });
+  };
 
   const opacity = animatedValue.interpolate({
     inputRange: [0, 1],
@@ -96,7 +152,7 @@ const CardDetails = ({showDetails = false, onCardDetailsPress}: Props) => {
         </Typography>
         <CardCarousel cardLocked={cardLocked} />
         <Animated.View style={styles.cardDetails}>
-          <AddToWallet />
+          <AddToWallet handleAddToWallet={handleAddToWallet} />
           <View style={styles.cardText}>
             <Typography variant="cardTitle">Card Number</Typography>
             <Typography variant="modalTitle">
@@ -117,7 +173,9 @@ const CardDetails = ({showDetails = false, onCardDetailsPress}: Props) => {
               <Typography variant="modalTitle">{CARDS[0].cvc}</Typography>
             </View>
           </View>
-          <OutlinedButton action={() => {}}>Copy Card Number</OutlinedButton>
+          <OutlinedButton action={copyToClipboard}>
+            Copy Card Number
+          </OutlinedButton>
         </Animated.View>
       </View>
       <View
