@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, {FC} from 'react';
-import {StatusBar} from 'react-native';
+import React, {FC, useEffect} from 'react';
+import {LogBox, StatusBar} from 'react-native';
 import Toast from 'react-native-toast-message';
 import Navigation from './Navigation';
 import {ThemeProvider} from 'styled-components/native';
@@ -9,6 +9,11 @@ import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App: FC = () => {
+  useEffect(() => {
+    LogBox.ignoreLogs(['Sending `onAnimatedValueUpdate` with no listeners registered']);
+  }, []);
+
+
   return (
     <ThemeProvider theme={CommonTheme}>
       <GestureHandlerRootView style={{flex: 1}}>

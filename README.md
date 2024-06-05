@@ -12,6 +12,21 @@ Extras:
 Notes:
 * Fork this project and share the link of the repository once you finish the excersie.
 
+## Notes
+First of all, thank you for the opportunity. Before you test my application, I wanted to highlight a few key functionalities.
+
+Please check the 'Card Controls' section. In this part, I have added two extra functionalities:
+
+Enable Wallet: This toggle shows or hides the "Add to Wallet" button in the card details section depending on the current value.
+Enable Face ID: This toggle, when enabled, requires Face ID for displaying card details and for locking/unlocking the card. If disabled, these actions can be performed without Face ID.
+Additionally, please verify the following features:
+
+The "Add to Wallet" button launches the add-to-wallet action.
+The "Copy Card Information" button copies the card information to the clipboard.
+Lastly, please test these functionalities on a real device, as features like Face ID may not work properly in a simulator.
+
+Thank you again!
+
 ## Step 0: Project setup
 
 Before running the project, install all dependencies:
