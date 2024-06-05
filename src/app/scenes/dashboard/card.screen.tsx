@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {ViewStyle, StyleSheet, View, FlatList} from 'react-native';
 import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
 import {useTheme} from 'styled-components';
@@ -20,6 +20,10 @@ const CardScreen: FC<ScreenProps> = ({navigation}) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const showDetails = useSelector((state: RootState) => state.card.showDetails);
+  const enableFaceID = useSelector(
+    (state: RootState) => state.settings.enableFaceID,
+  );
+
   const styles = {
     container: {
       flexGrow: 1,
@@ -31,29 +35,36 @@ const CardScreen: FC<ScreenProps> = ({navigation}) => {
   };
 
   const onViewMoreTransactionsPress = () => {
-    navigation.navigate('RecentTransactions');
+    navigation.navigate('RecentTransactionsScreen');
+  };
+  const onCardControlsPress = () => {
+    navigation.navigate('CardControlsScreen');
   };
   const rnBiometrics = new ReactNativeBiometrics();
   const onCardDetailsPress = async () => {
     if (!showDetails) {
       try {
-        const {biometryType} = await rnBiometrics.isSensorAvailable();
+        if (enableFaceID) {
+          const {biometryType} = await rnBiometrics.isSensorAvailable();
 
-        if (
-          biometryType === BiometryTypes.TouchID ||
-          biometryType === BiometryTypes.FaceID
-        ) {
-          const result = await rnBiometrics.simplePrompt({
-            promptMessage: 'Confirm your identity',
-          });
+          if (
+            biometryType === BiometryTypes.TouchID ||
+            biometryType === BiometryTypes.FaceID
+          ) {
+            const result = await rnBiometrics.simplePrompt({
+              promptMessage: 'Confirm your identity',
+            });
 
-          if (result.success) {
-            dispatch(toggleShowDetails());
+            if (result.success) {
+              dispatch(toggleShowDetails());
+            } else {
+              console.log('User cancelled biometric prompt');
+            }
           } else {
-            console.log('User cancelled biometric prompt');
+            console.log('Biometric sensor not available');
+            dispatch(toggleShowDetails());
           }
         } else {
-          console.log('Biometric sensor not available');
           dispatch(toggleShowDetails());
         }
       } catch (error) {
@@ -69,6 +80,7 @@ const CardScreen: FC<ScreenProps> = ({navigation}) => {
       <CardDetails
         showDetails={showDetails}
         onCardDetailsPress={onCardDetailsPress}
+        onCardControlsPress={onCardControlsPress}
       />
       <Balance />
       <Payment />

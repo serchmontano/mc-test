@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Animated, View, StyleSheet} from 'react-native';
 import WalletManager from 'react-native-wallet-manager';
 import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
@@ -26,34 +26,49 @@ import {RootState} from '@app/redux/store';
 interface Props {
   showDetails: boolean;
   onCardDetailsPress: () => void;
+  onCardControlsPress: () => void;
 }
 
-const CardDetails = ({showDetails = false, onCardDetailsPress}: Props) => {
+const CardDetails = ({
+  showDetails = false,
+  onCardDetailsPress,
+  onCardControlsPress,
+}: Props) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const animatedValue = useRef(new Animated.Value(showDetails ? 1 : 0)).current;
   const cardLocked = useSelector((state: RootState) => state.card.blockCard);
+  const enableWallet = useSelector(
+    (state: RootState) => state.settings.enableWallet,
+  );
+  const enableFaceID = useSelector(
+    (state: RootState) => state.settings.enableFaceID,
+  );
 
   const rnBiometrics = new ReactNativeBiometrics();
   const onLockCard = async () => {
     try {
-      const {biometryType} = await rnBiometrics.isSensorAvailable();
+      if (enableFaceID) {
+        const {biometryType} = await rnBiometrics.isSensorAvailable();
 
-      if (
-        biometryType === BiometryTypes.TouchID ||
-        biometryType === BiometryTypes.FaceID
-      ) {
-        const result = await rnBiometrics.simplePrompt({
-          promptMessage: 'Confirm your identity',
-        });
+        if (
+          biometryType === BiometryTypes.TouchID ||
+          biometryType === BiometryTypes.FaceID
+        ) {
+          const result = await rnBiometrics.simplePrompt({
+            promptMessage: 'Confirm your identity',
+          });
 
-        if (result.success) {
-          dispatch(toggleBlockCard());
+          if (result.success) {
+            dispatch(toggleBlockCard());
+          } else {
+            console.log('User cancelled biometric prompt');
+          }
         } else {
-          console.log('User cancelled biometric prompt');
+          console.log('Biometric sensor not available');
+          dispatch(toggleBlockCard());
         }
       } else {
-        console.log('Biometric sensor not available');
         dispatch(toggleBlockCard());
       }
     } catch (error) {
@@ -152,7 +167,9 @@ const CardDetails = ({showDetails = false, onCardDetailsPress}: Props) => {
         </Typography>
         <CardCarousel cardLocked={cardLocked} />
         <Animated.View style={styles.cardDetails}>
-          <AddToWallet handleAddToWallet={handleAddToWallet} />
+          {enableWallet && (
+            <AddToWallet handleAddToWallet={handleAddToWallet} />
+          )}
           <View style={styles.cardText}>
             <Typography variant="cardTitle">Card Number</Typography>
             <Typography variant="modalTitle">
@@ -183,7 +200,11 @@ const CardDetails = ({showDetails = false, onCardDetailsPress}: Props) => {
           styles.controlsContainer,
           !showDetails && styles.collapsedControls,
         ]}>
-        <CardIconButton isActive={false} variation="controls" />
+        <CardIconButton
+          isActive={false}
+          variation="controls"
+          onPress={onCardControlsPress}
+        />
         <CardIconButton
           isActive={cardLocked}
           variation="lockCard"

@@ -2,7 +2,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {HorizontalGradient} from '@atomic/atoms/gradient';
-import {CardScreen, RecentTransactions} from '@app/scenes/dashboard';
+import {
+  CardControlsScreen,
+  CardScreen,
+  RecentTransactionsScreen,
+} from '@app/scenes/dashboard';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@app/redux/store';
 import {useTheme} from 'styled-components';
@@ -11,7 +15,8 @@ import {toggleShowDetails} from '@app/redux/slices/card.slice';
 
 export type CardRoutes = {
   CardScreen: undefined;
-  RecentTransactions: undefined;
+  RecentTransactionsScreen: undefined;
+  CardControlsScreen: undefined;
 };
 
 const Stack = createStackNavigator<CardRoutes>();
@@ -45,10 +50,21 @@ const CardStack = () => {
         }}
       />
       <Stack.Screen
-        name="RecentTransactions"
-        component={RecentTransactions}
+        name="RecentTransactionsScreen"
+        component={RecentTransactionsScreen}
         options={{
           headerTitle: 'Transactions',
+          headerTintColor: 'white',
+          headerBackground: () => (
+            <HorizontalGradient style={{width: '100%', height: '100%'}} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="CardControlsScreen"
+        component={CardControlsScreen}
+        options={{
+          headerTitle: 'Card Controls',
           headerTintColor: 'white',
           headerBackground: () => (
             <HorizontalGradient style={{width: '100%', height: '100%'}} />

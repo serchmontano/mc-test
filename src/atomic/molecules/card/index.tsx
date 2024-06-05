@@ -1,3 +1,4 @@
 import Provider from './provider.component';
+import SettingsItem from './settings-item.component';
 
-export {Provider};
+export {Provider, SettingsItem};

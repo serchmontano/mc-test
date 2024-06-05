@@ -43,7 +43,7 @@ export const CARDS = [
     expMonth: '09',
     expYear: '2025',
     cvc: '242',
-    type: 'CREDIT'
+    type: 'CREDIT',
   },
 ];
 
@@ -165,5 +165,28 @@ export const TRANSACTIONS = [
     date: '2021-04-25 11:45AM',
     amount: 50.0,
     reward: 50,
+  },
+];
+
+export const CONTROL_BUTTONS = [
+  {
+    title: 'Reset PIN',
+    icon: require('@assets/icons/details.png'),
+    onPress: () => {},
+  },
+  {
+    title: 'Notifications',
+    icon: require('@assets/icons/notifications.png'),
+    onPress: () => {},
+  },
+  {
+    title: 'Request New Card',
+    icon: require('@assets/icons/card.png'),
+    onPress: () => {},
+  },
+  {
+    title: 'Adjust Credit Limit',
+    icon: require('@assets/icons/adjust.png'),
+    onPress: () => {},
   },
 ];
